@@ -2,19 +2,22 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 
 abstract class Repository
 {
-    protected Builder $query;
+    private $model;
 
-    public function __construct($query)
+    public function __construct(Model $model)
     {
-        $this->$query = $query;
+        $this->$model = $model;
     }
 
+    abstract function model();
+   
     public function all()
     {
-        return $this->query->get();
+        return $this->model::all();
     }
 }

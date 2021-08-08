@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+interface {{ class }} 
+{
+    /**
+     * Get's all posts.
+     *
+     * @return mixed
+     */
+    public function all();
+}

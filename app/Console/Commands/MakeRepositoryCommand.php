@@ -2,50 +2,43 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
+use Illuminate\Console\GeneratorCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
-class MakeRepositoryCommand extends Command
+class MakeRepositoryCommand extends GeneratorCommand
 {
     /**
-     * The name and signature of the console command.
+     * The console command name.
      *
      * @var string
      */
-    protected $signature = 'make:repository {name}';
+    protected $name = 'make:repo-interface';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new Repository Class';
+    protected $description = 'Create a new Repo Interface';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Repository';
+    protected $type = 'InterfaceRepo command';
 
     /**
-     * Create a new command instance.
+     * Replace the class name for the given stub.
      *
-     * @return void
+     * @param  string  $stub
+     * @param  string  $name
+     * @return string
      */
-    public function __construct()
+    protected function replaceClass($stub, $name)
     {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
-    {
-        $this->getStub();
-        
+        $stub = parent::replaceClass($stub, $name);
     }
 
     /**
@@ -55,18 +48,35 @@ class MakeRepositoryCommand extends Command
      */
     protected function getStub()
     {
-        return __DIR__ . '../stubs/repository.stub';
+        $relativePath = '/stubs/interfacerepo.stub';
+
+        return file_exists($customPath = $this->laravel->basePath(trim($relativePath, '/')))
+            ? $customPath
+            : __DIR__ . $relativePath;
     }
 
     /**
      * Get the default namespace for the class.
      *
-     * @param string $rootNamespace
-     *
+     * @param  string  $rootNamespace
      * @return string
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace . '\Repositories';
+        return 'App\Repositories\RepositoryInterfaces';
     }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['name', InputArgument::REQUIRED, 'The name of the RepoInterface'],
+        ];
+    }
+
+    
 }

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+
 use App\Repositories\ProductRepository;
+use App\Repositories\RepositoryInterfaces\ProductInterface ;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     protected $productRepo;
-    public function __construct(ProductRepository $productRepo)
+    public function __construct(ProductInterface $productRepo)
     {
         $this->productRepo = $productRepo;
     }
