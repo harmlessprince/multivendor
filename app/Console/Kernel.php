@@ -2,7 +2,7 @@
 
 namespace App\Console;
 
-use App\Console\Commands\MakeRepositoryCommand;
+use App\Console\Commands\MakeRepositoryInterfaceCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         //
-        MakeRepositoryCommand::class,
+        MakeRepositoryInterfaceCommand::class,
     ];
 
     /**

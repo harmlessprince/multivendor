@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class ProductRepository implements ProductInterface
 {
 
-    protected $model;
     public function __construct()
     {
         // $this->model = app()->make($this->model());
