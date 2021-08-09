@@ -1,0 +1,16 @@
+<?php
+
+namespace {{ namespace }};;
+
+use App\Repositories\RepositoryInterfaces\{{interfaceToImplement}};
+
+class {{class}} implements {{interfaceToImplement}}
+{
+
+/**
+     * Get's all posts.
+     *
+     * @return mixed
+     */
+    public function all(){}
+}
