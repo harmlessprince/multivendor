@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrderStatus;
 use Illuminate\Database\Seeder;
 
 class OrderStatusSeeder extends Seeder
@@ -14,5 +15,10 @@ class OrderStatusSeeder extends Seeder
     public function run()
     {
         //
+         //
+         $orderStatuses = ['pending', 'processing', 'completed', 'decline'];
+         foreach ($orderStatuses as $key => $orderStatus) {
+             OrderStatus::firstOrCreate(['order_status' => $orderStatus]);
+         }
     }
 }
