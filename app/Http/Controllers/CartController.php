@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\CartRepository;
 use App\Repositories\RepositoryInterfaces\CartRepositoryInterface;
+use App\Repositories\RepositoryInterfaces\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
 
-     //
-     protected $cartRepo;
-     public function __construct(CartRepositoryInterface $cartRepo)
-     {
-         $this->cartRepo = $cartRepo;
-     }
+    //
+    protected $cartRepo;
+    protected $productRepo;
+    public function __construct(CartRepository $cartRepo, ProductRepositoryInterface $productRepo)
+    {
+        $this->cartRepo = $cartRepo;
+        $this->productRepo = $productRepo;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,17 +25,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $cartItems = $this->cartRepo->getContent();
+        return view('cart.index', compact('cartItems'));
     }
 
     /**
@@ -40,9 +35,11 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function add($id)
     {
-        //
+        $product = $this->productRepo->show($id);
+        $this->cartRepo->add($product);
+        return redirect()->route('cart.index');
     }
 
     /**
@@ -53,7 +50,6 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**
@@ -76,7 +72,8 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($this->cartRepo->add($id));
+        $this->cartRepo->update($request, $id);
+        return back();
     }
 
     /**
@@ -87,6 +84,7 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->cartRepo->remove($id);
+        return back();
     }
 }
