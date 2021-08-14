@@ -23,15 +23,7 @@
 
 <body>
     <div class="container-fluid">
-        @auth
             @include('layouts.navigation')
-        @else
-            <a href="{{ route('login') }}" class="">Log in</a>
-
-            @if (Route::has('register'))
-                <a href="{{ route('register') }}" class="">Register</a>
-            @endif
-        @endauth
         <section>
             @yield('contents')
             {{-- <h1>HEllo</h1> --}}
