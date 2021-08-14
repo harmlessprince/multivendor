@@ -15,18 +15,7 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            @guest
-            <li class="nav-item">
-                <a href="{{ route('login') }}" class="nav-link p-0 m-0 mr-2">
-                    Login
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('register') }}" class="nav-link p-0 m-0 mr-5">
-                    Register
-                </a>
-            </li>
-            @endguest
+
             <li class="nav-item">
                 <a href="{{ route('cart.index') }}" class="nav-link p-0 m-0">
                     <i class="fa fa-cart-arrow-down text-info fa-2x" aria-hidden="true">
@@ -56,7 +45,7 @@
                         <form class="dropdown-item" method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a href="route('logout')" onclick="event.preventDefault();
-                            this.closest('form').submit();">logout</a>
+                                this.closest('form').submit();">logout</a>
                         </form>
                         <div class=" dropdown-divider">
                         </div>
@@ -64,7 +53,18 @@
                     </div>
                 </li>
             @endauth
-
+            @guest
+                <li class="nav-item">
+                    <a href="{{ route('login') }}" class="nav-link p-0 m-0 mr-2">
+                        Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('register') }}" class="nav-link p-0 m-0 mr-5">
+                        Register
+                    </a>
+                </li>
+            @endguest
         </ul>
     </div>
 </nav>

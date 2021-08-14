@@ -43,13 +43,13 @@ class CartController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the checkout view.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function checkout()
     {
+        return view('cart.checkout');
     }
 
     /**

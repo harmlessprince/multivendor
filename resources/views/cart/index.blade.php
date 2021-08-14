@@ -40,7 +40,7 @@
         </table>
         <h3>Total Price:# {{ number_format(\Cart::session(auth()->id())->getTotal(), 2) }}</h3>
         <p>
-            <button class="btn btn-lg btn-primary">Proceed To Checkout</button>
+            <a class="btn btn-lg btn-primary" href="{{route('cart.checkout')}}">Proceed To Checkout</a>
         </p>
     </div>
 

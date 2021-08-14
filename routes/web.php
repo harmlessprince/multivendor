@@ -16,14 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/cart', [CartController::class, 'index'])->middleware(['auth'])->name('cart.index');
-Route::get('/cart/add/{id}', [CartController::class, 'add'])->middleware(['auth'])->name('cart.add');
-Route::get('/cart/update/{id}', [CartController::class, 'update'])->middleware(['auth'])->name('cart.update');
-Route::get('/cart/destroy/{id}', [CartController::class, 'destroy'])->middleware(['auth'])->name('cart.destroy');
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('cart')->name('cart.')->group(function () {
+        Route::get('/', [CartController::class, 'index'])->name('index');
+        Route::get('add/{id}', [CartController::class, 'add'])->name('add');
+        Route::get('update/{id}', [CartController::class, 'update'])->name('update');
+        Route::get('destroy/{id}', [CartController::class, 'destroy'])->name('destroy');
+        Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
+    });
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
