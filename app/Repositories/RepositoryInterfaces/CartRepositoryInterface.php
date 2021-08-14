@@ -9,5 +9,5 @@ interface CartRepositoryInterface
      *
      * @return mixed
      */
-    public function all();
+    public function add($productId);
 }

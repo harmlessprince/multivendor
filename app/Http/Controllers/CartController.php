@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RepositoryInterfaces\CartRepositoryInterface;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+
+     //
+     protected $cartRepo;
+     public function __construct(CartRepositoryInterface $cartRepo)
+     {
+         $this->cartRepo = $cartRepo;
+     }
     /**
      * Display a listing of the resource.
      *
@@ -68,7 +76,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($id);
+        dd($this->cartRepo->add($id));
     }
 
     /**

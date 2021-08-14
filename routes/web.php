@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::post('/cart/{id}', [CartController::class, 'update'])->name('add.cart');
+Route::get('/cart/{id}', [CartController::class, 'update'])->name('add.cart');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

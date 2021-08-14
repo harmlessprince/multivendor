@@ -2,9 +2,9 @@
 
 namespace App\Repositories;;
 
-use App\Repositories\RepositoryInterfaces\{{interfaceToImplement}};
+use App\Repositories\RepositoryInterfaces\CartRepositoryInterface;
 
-class CartRepository implements {{interfaceToImplement}}
+class CartRepository implements CartRepositoryInterface
 {
 
 /**
@@ -12,5 +12,8 @@ class CartRepository implements {{interfaceToImplement}}
      *
      * @return mixed
      */
-    public function all(){}
+    public function add($productId)
+    {
+        return $productId;
+    }
 }
