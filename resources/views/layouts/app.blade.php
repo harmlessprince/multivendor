@@ -21,9 +21,9 @@
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 </head>
 
-<body>
+<body class="bg-light">
     <div class="container-fluid">
-            @include('layouts.navigation')
+        @include('layouts.navigation')
         <section>
             @yield('contents')
             {{-- <h1>HEllo</h1> --}}

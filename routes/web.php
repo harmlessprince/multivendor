@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('update/{id}', [CartController::class, 'update'])->name('update');
         Route::get('destroy/{id}', [CartController::class, 'destroy'])->name('destroy');
         Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
+    });
+    Route::prefix('order')->name('order.')->group(function () {
+       Route::post('/', [OrderController::class, 'store'])->name('store');
     });
     Route::get('/dashboard', function () {
         return view('dashboard');

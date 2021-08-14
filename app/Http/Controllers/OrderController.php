@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderStoreRequest;
 use App\Models\Order;
+use App\Repositories\RepositoryInterfaces\OrderRepositoryInterface;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    protected $orderRepo;
+    public function __construct(OrderRepositoryInterface $orderRepo)
+    {
+        $this->orderRepo = $orderRepo;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,9 +41,10 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrderStoreRequest $request)
     {
-        //
+        $validatedData = $request->validated();
+        $this->orderRepo->storeOrder($validatedData);
     }
 
     /**
