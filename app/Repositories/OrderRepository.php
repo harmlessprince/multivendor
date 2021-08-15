@@ -61,6 +61,11 @@ class OrderRepository implements OrderRepositoryInterface
         });
         //empty cart
         $this->cartRepo->clearCart();
+
+        if ($data['payment_method'] != self::ORDER_PAYMENT_METHOD_DEFAULT) {
+           //redirect to paystack
+           
+        }
         //send email customer
 
         //take user to thank you

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\CartRepository;
 use App\Repositories\RepositoryInterfaces\CartRepositoryInterface;
+use App\Repositories\RepositoryInterfaces\PaymentMethodRepositoryInterface;
 use App\Repositories\RepositoryInterfaces\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,12 @@ class CartController extends Controller
     //
     protected $cartRepo;
     protected $productRepo;
-    public function __construct(CartRepository $cartRepo, ProductRepositoryInterface $productRepo)
+    protected $paymentMethodRepo;
+    public function __construct(CartRepository $cartRepo, ProductRepositoryInterface $productRepo, PaymentMethodRepositoryInterface $paymentMethodRepo)
     {
         $this->cartRepo = $cartRepo;
         $this->productRepo = $productRepo;
+        $this->paymentMethodRepo = $paymentMethodRepo;
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +52,8 @@ class CartController extends Controller
      */
     public function checkout()
     {
-        return view('cart.checkout');
+        $paymentMethods = $this->paymentMethodRepo->all();
+        return view('cart.checkout', compact('paymentMethods'));
     }
 
     /**

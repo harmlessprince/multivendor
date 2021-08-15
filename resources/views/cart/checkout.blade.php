@@ -6,7 +6,7 @@
         <div class="row mt-5 mb-5">
             <div class="container">
                 <div class="col-md-12">
-                    <form action="{{route('order.store')}}" method="post">
+                    <form action="{{ route('order.store') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="" class="">Full Name</label>
@@ -15,7 +15,8 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="">State</label>
-                            <input type="text" class="form-control" name="shipping_state" id="shipping_state" placeholder="">
+                            <input type="text" class="form-control" name="shipping_state" id="shipping_state"
+                                placeholder="">
                         </div>
                         <div class="form-group">
                             <label for="" class="">City</label>
@@ -33,9 +34,21 @@
                         </div>
                         <div class="form-group">
                             <label for="" class="">Mobile</label>
-                            <input type="text" class="form-control" name="shipping_phone" id="shipping_phone" placeholder="">
+                            <input type="text" class="form-control" name="shipping_phone" id="shipping_phone"
+                                placeholder="">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-sm"> Place Order</button>
+                        <h3>Payment Options</h3>
+                        @foreach ($paymentMethods as $item)
+                            <div class="form-check mb-2">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="payment_method" id=""
+                                        value="{{ $item->id }}">
+                                    {{ ucwords($item->payment_method) }}
+                                </label>
+                            </div>
+                        @endforeach
+
+                        <button type="submit" class=" btn btn-primary btn-md mt-3"> Place Order</button>
                     </form>
                 </div>
             </div>
