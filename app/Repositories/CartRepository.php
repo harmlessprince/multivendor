@@ -15,7 +15,7 @@ class CartRepository implements CartRepositoryInterface
     }
     public function add($product)
     {
-        $this->setModel()->add(array(
+        return $this->setModel()->add(array(
             'id' => uniqid($product->id),
             'name' => $product->name,
             'price' => $product->price,
@@ -36,7 +36,7 @@ class CartRepository implements CartRepositoryInterface
      */
     public function update($request, $id)
     {
-        $this->setModel()->update($id, array(
+        return  $this->setModel()->update($id, array(
             'quantity' => array(
                 'relative' => false,
                 'value' => $request->quantity,
@@ -46,11 +46,12 @@ class CartRepository implements CartRepositoryInterface
 
     public function remove($productId)
     {
-        $this->setModel()->remove($productId);
+        return $this->setModel()->remove($productId);
     }
 
     public function clearCart()
     {
+        return $this->setModel()->clear();
     }
 
     public function cartIsEmpty()
@@ -64,7 +65,7 @@ class CartRepository implements CartRepositoryInterface
 
     public function getTotalQuantity()
     {
-        # code...
+        return $this->setModel()->getTotalQuantity();
     }
     /**
      * Get's all posts.
@@ -73,6 +74,7 @@ class CartRepository implements CartRepositoryInterface
      */
     public function getTotal()
     {
+        return $this->setModel()->getTotal();
     }
 
     public function getSubtotal()

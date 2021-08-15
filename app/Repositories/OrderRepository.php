@@ -3,6 +3,7 @@
 namespace App\Repositories;;
 
 use App\Models\Order;
+use App\Repositories\RepositoryInterfaces\CartRepositoryInterface;
 use App\Repositories\RepositoryInterfaces\OrderRepositoryInterface;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Database\Eloquent\Model;
@@ -12,8 +13,10 @@ class OrderRepository implements OrderRepositoryInterface
     const ORDER_STATUS_DEFAULT = 1; //PENDING
     const ORDER_PAYMENT_METHOD_DEFAULT = 2; //CASH
     protected $model;
-    public function __construct()
+    protected $cartRepo;
+    public function __construct(CartRepositoryInterface $cartRepo)
     {
+        $this->cartRepo = $cartRepo;
         $this->model = $this->setModel();
     }
 
@@ -48,10 +51,21 @@ class OrderRepository implements OrderRepositoryInterface
         $order->order_status_id = self::ORDER_STATUS_DEFAULT;
         $order->payment_method_id = self::ORDER_PAYMENT_METHOD_DEFAULT;
         $order->order_number = uniqid('ORDER-NUMBER-');
-        $order->grand_total = CartFacade::session(auth()->id())->getTotal();
-        $order->item_count =  CartFacade::session(auth()->id())->getTotalQuantity();
+        $order->grand_total = $this->cartRepo->getTotal();
+        $order->item_count =  $this->cartRepo->getTotalQuantity();
         $order->save();
-        return $order;
+        //save order items
+        $cartItems = $this->cartRepo->getContent();
+        $cartItems->each(function ($cartItem, $key) use ($order) {
+            $order->items()->attach($cartItem->associatedModel->id, ['price' => $cartItem->price, 'quantity' => $cartItem->quantity]);
+        });
+        //empty cart
+        $this->cartRepo->clearCart();
+        //send email customer
+
+        //take user to thank you
+
+        return "Order Completed, thank you for your order ";
     }
 
 

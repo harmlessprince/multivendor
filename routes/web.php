@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('add/{id}', [CartController::class, 'add'])->name('add');
         Route::get('update/{id}', [CartController::class, 'update'])->name('update');
         Route::get('destroy/{id}', [CartController::class, 'destroy'])->name('destroy');
+        Route::get('clear', [CartController::class, 'clear'])->name('clear');
         Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
     });
     Route::prefix('order')->name('order.')->group(function () {

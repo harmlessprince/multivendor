@@ -44,7 +44,8 @@ class OrderController extends Controller
     public function store(OrderStoreRequest $request)
     {
         $validatedData = $request->validated();
-        $this->orderRepo->storeOrder($validatedData);
+        $res = $this->orderRepo->storeOrder($validatedData);
+        return $res;
     }
 
     /**

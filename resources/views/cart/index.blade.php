@@ -39,9 +39,15 @@
             </tbody>
         </table>
         <h3>Total Price:# {{ number_format(\Cart::session(auth()->id())->getTotal(), 2) }}</h3>
-        <p>
-            <a class="btn btn-lg btn-primary" href="{{route('cart.checkout')}}">Proceed To Checkout</a>
-        </p>
+
+        <div class="row">
+            <a class="btn btn-lg btn-primary mr-auto" href="{{ route('cart.checkout') }}">Proceed To Checkout</a>
+
+
+            <a class="btn btn-lg btn-secondary" href="{{ route('cart.clear') }}">Clear Cart</a>
+
+
+        </div>
     </div>
 
 @endsection
