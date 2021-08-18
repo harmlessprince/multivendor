@@ -2,15 +2,22 @@
 
 namespace App\Repositories;;
 
-use App\Repositories\RepositoryInterfaces\{{interfaceToImplement}};
+use App\Repositories\RepositoryInterfaces\PaystackRepositoryInterface;
 
-class PaystackRepository implements {{interfaceToImplement}}
+class PaystackRepository implements PaystackRepositoryInterface
 {
 
-/**
-     * Get's all posts.
-     *
-     * @return mixed
-     */
-    public function all(){}
+
+    public function __construct($secretKey, $baseUrl, $requestOptions)
+    {
+        
+    }
+
+    public function prepareTransaction($amount, $destination, $info = null)
+    {
+    }
+
+    public function verify($refernce)
+    {
+    }
 }
