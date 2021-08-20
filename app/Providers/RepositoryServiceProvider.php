@@ -27,10 +27,10 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        app()->bind(ProductRepositoryInterface::class, ProductRepository::class);
-        app()->bind(CartRepositoryInterface::class, CartRepository::class);
-        app()->bind(OrderRepositoryInterface::class, OrderRepository::class);
-        app()->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
+        $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
+        $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
+        $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
         $this->app->singleton(PaystackRepositoryInterface::class, function ($app) {
             return new PaystackRepository(
                 Config::get('paystack.secretKey'),
