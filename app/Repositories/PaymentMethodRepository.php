@@ -4,22 +4,20 @@ namespace App\Repositories;;
 
 use App\Models\PaymentMethod;
 use App\Repositories\Contracts\PaymentMethodRepositoryInterface;
+use App\Repositories\Eloquent\BaseRepository;
 
-class PaymentMethodRepository implements PaymentMethodRepositoryInterface
+class PaymentMethodRepository extends BaseRepository implements PaymentMethodRepositoryInterface
 {
-
+    /**
+     * @var Model
+     */
     protected $model;
-    public function __construct()
+    /**
+     * BaseRepository Constructor
+     * @param Model $model
+     */
+    public function __construct(PaymentMethod $model)
     {
-        $this->model = $this->setModel();
-    }
-
-    public function all()
-    {
-        return  $this->model::all();
-    }
-    public function setModel()
-    {
-        return PaymentMethod::class;
+        $this->model = $model;
     }
 }

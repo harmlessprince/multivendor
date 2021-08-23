@@ -2,10 +2,8 @@
 
 namespace App\Repositories;;
 
-use App\Repositories\Contracts\CartRepositoryInterface;
 use Darryldecode\Cart\Facades\CartFacade;
-use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Request;
+use App\Repositories\Contracts\CartRepositoryInterface;
 
 class CartRepository implements CartRepositoryInterface
 {

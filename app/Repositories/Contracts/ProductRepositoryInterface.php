@@ -1,25 +1,23 @@
 <?php
 
 namespace App\Repositories\Contracts;
-use App\Models\Product;
-
-interface ProductRepositoryInterface
+interface ProductRepositoryInterface extends EloquentRepositoryInterface
 {
-    public function setModel();
+    // public function setModel();
 
-    /**
-     * Get's all posts.
-     *
-     * @return mixed
-     */
-    public function all();
+    // /**
+    //  * Get's all posts.
+    //  *
+    //  * @return mixed
+    //  */
+    // public function all();
 
 
-    /**
-     * Display the specified resource.
-     * @return \Illuminate\Http\Response
-     */
-    public function show($product);
+    // /**
+    //  * Display the specified resource.
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show($product);
 
 
 }

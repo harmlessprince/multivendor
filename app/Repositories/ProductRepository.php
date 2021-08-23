@@ -4,29 +4,22 @@ namespace App\Repositories;
 
 use App\Models\Product;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Repositories\Eloquent\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductRepository implements ProductRepositoryInterface
+class ProductRepository extends BaseRepository implements ProductRepositoryInterface
 {
+
+    /**
+     * @var Model
+     */
     protected $model;
-    public function __construct()
+    /**
+     * BaseRepository Constructor
+     * @param Model $model
+     */
+    public function __construct(Product $model)
     {
-        $this->model = $this->setModel();
-
-    }
-
-    public function all()
-    {
-        return  $this->model::all();
-    }
-
-    public function show($product)
-    {
-        return  $this->model::findOrFail($product);
-    }
-
-    public function setModel()
-    {
-        return Product::class;
+        $this->model = $model;
     }
 }

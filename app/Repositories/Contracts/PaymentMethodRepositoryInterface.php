@@ -2,12 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-interface PaymentMethodRepositoryInterface 
+interface PaymentMethodRepositoryInterface extends EloquentRepositoryInterface
 {
-    /**
-     * Get's all posts.
-     *
-     * @return mixed
-     */
-    public function all();
+    
 }
