@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};;
 
-use App\Repositories\RepositoryInterfaces\{{interfaceToImplement}};
+use App\Repositories\Contracts\{{interfaceToImplement}};
 
 class {{class}} implements {{interfaceToImplement}}
 {

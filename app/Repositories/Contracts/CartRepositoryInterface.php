@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\RepositoryInterfaces;
+namespace App\Repositories\Contracts;
 
 use Symfony\Component\HttpFoundation\Request;
 

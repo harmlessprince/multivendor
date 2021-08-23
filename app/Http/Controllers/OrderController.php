@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderStoreRequest;
 use App\Models\Order;
-use App\Repositories\RepositoryInterfaces\OrderRepositoryInterface;
+use App\Repositories\Contracts\OrderRepositoryInterface;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller

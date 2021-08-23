@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 
 use App\Repositories\ProductRepository;
-use App\Repositories\RepositoryInterfaces\ProductRepositoryInterface ;
+use App\Repositories\Contracts\ProductRepositoryInterface ;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller

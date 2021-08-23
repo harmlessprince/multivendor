@@ -75,7 +75,7 @@ class MakeInterfaceCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return 'App\Repositories\RepositoryInterfaces';
+        return 'App\Repositories\Contracts';
     }
 
     /**

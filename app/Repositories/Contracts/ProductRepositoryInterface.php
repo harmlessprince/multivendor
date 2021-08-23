@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\RepositoryInterfaces;
+namespace App\Repositories\Contracts;
 use App\Models\Product;
 
 interface ProductRepositoryInterface

@@ -3,8 +3,8 @@
 namespace App\Repositories;;
 
 use App\Models\Order;
-use App\Repositories\RepositoryInterfaces\CartRepositoryInterface;
-use App\Repositories\RepositoryInterfaces\OrderRepositoryInterface;
+use App\Repositories\Contracts\CartRepositoryInterface;
+use App\Repositories\Contracts\OrderRepositoryInterface;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Database\Eloquent\Model;
 

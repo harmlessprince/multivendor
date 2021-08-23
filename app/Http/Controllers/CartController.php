@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\CartRepository;
-use App\Repositories\RepositoryInterfaces\CartRepositoryInterface;
-use App\Repositories\RepositoryInterfaces\PaymentMethodRepositoryInterface;
-use App\Repositories\RepositoryInterfaces\ProductRepositoryInterface;
+use App\Repositories\Contracts\CartRepositoryInterface;
+use App\Repositories\Contracts\PaymentMethodRepositoryInterface;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 
 class CartController extends Controller

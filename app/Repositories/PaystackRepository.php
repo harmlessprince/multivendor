@@ -2,7 +2,7 @@
 
 namespace App\Repositories;;
 
-use App\Repositories\RepositoryInterfaces\PaystackRepositoryInterface;
+use App\Repositories\Contracts\PaystackRepositoryInterface;
 
 class PaystackRepository implements PaystackRepositoryInterface
 {
