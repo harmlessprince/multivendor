@@ -18,6 +18,7 @@ use App\Repositories\Eloquent\BaseRepository;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -36,9 +37,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
         $this->app->singleton(PaystackRepositoryInterface::class, function ($app) {
             return new PaystackRepository(
-                Config::get('paystack.secretKey'),
-                Config::get('paystack.paymentUrl'),
-                $this->setRequestOptions()
+                Config::get('paystack.SECRET_KEY'),
+                Config::get('paystack.PAYMENT_URL'),
+                Config::get('paystack.CALLBACK_URL')
             );
         });
     }
@@ -53,15 +54,4 @@ class RepositoryServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Set options for making the Client request
-     */
-    private function setRequestOptions()
-    {
-        $authBearer = 'Bearer ' .  Config::get('paystack.secretKey');
-        return new Client(
-            Config::get('paystack.paymentUrl'),
-            $authBearer
-        );
-    }
 }

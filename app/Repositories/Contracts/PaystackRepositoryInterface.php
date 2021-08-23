@@ -9,7 +9,7 @@ interface PaystackRepositoryInterface
      *
      * @return void
      */
-    public function prepareTransaction($amount, $destination, $info = null);
+    public function prepareTransaction($data);
     
     /**
      * Verify a payment transaction

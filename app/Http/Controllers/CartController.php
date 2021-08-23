@@ -40,7 +40,7 @@ class CartController extends Controller
      */
     public function add($id)
     {
-        $product = $this->productRepo->show($id);
+        $product = $this->productRepo->findById($id);
         $this->cartRepo->add($product);
         return redirect()->route('cart.index');
     }
