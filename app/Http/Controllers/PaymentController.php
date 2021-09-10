@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\OrderRepository;
 use App\Repositories\PaystackRepository;
 use Illuminate\Support\Facades\Redirect;
 use Unicodeveloper\Paystack\Facades\Paystack;
@@ -9,9 +10,11 @@ use Unicodeveloper\Paystack\Facades\Paystack;
 class PaymentController
 {
     private $paystackRepo;
-    public function __construct(PaystackRepository $paystackRepository)
+    private $orderRepo;
+    public function __construct(PaystackRepository $paystackRepository, OrderRepository $orderRepository)
     {
         $this->paystackRepo = $paystackRepository;
+        $this->orderRepo = $orderRepository;
         # code...
     }
     /**
@@ -20,8 +23,7 @@ class PaymentController
      */
     public function redirectToGateway()
     {
-        
-      return $this->paystackRepo->prepareTransaction();
+        return $this->paystackRepo->prepareTransaction();
     }
 
     /**
@@ -30,11 +32,20 @@ class PaymentController
      */
     public function handleGatewayCallback()
     {
-        $paymentDetails = Paystack::getPaymentData();
-
-        dd($paymentDetails);
-        // Now you have the payment details,
-        // you can store the authorization_code in your db to allow for recurrent subscriptions
-        // you can then redirect or do whatever you want
+        $paymentDetail = Paystack::getPaymentData();
+        if ($paymentDetail['status'] && $paymentDetail['data']['status'] == 'success') {
+            $order_number = $paymentDetail['data']['reference'];
+            $order =  $this->orderRepo->findByOrderNumber($order_number);
+            if (!$order) {
+                return redirect('/')->with(['error' => 'Payment unsuccessful, Something went wrong ']);
+            }
+            $this->orderRepo->update($order->id, [
+                'is_paid' => true,
+                'payment_method_id' => 1,
+            ]);
+            //send mail
+            return redirect('/')->with(['success' => 'Payment successful']);
+        }
+        return redirect('/')->with(['error' => 'Payment unsuccessful, Something went wrong ']);
     }
 }

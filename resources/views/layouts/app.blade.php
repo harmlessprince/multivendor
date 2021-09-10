@@ -25,6 +25,7 @@
     <div class="container-fluid">
         @include('layouts.navigation')
         <section>
+            @include('components.flash-message')
             @yield('contents')
             {{-- <h1>HEllo</h1> --}}
         </section>

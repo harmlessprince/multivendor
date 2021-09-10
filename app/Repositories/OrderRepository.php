@@ -5,32 +5,27 @@ namespace App\Repositories;;
 use App\Models\Order;
 use App\Repositories\Contracts\CartRepositoryInterface;
 use App\Repositories\Contracts\OrderRepositoryInterface;
+use App\Repositories\Eloquent\BaseRepository;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Database\Eloquent\Model;
 use Unicodeveloper\Paystack\Facades\Paystack;
 
-class OrderRepository implements OrderRepositoryInterface
+class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 {
     const ORDER_STATUS_DEFAULT = 1; //PENDING
     const ORDER_PAYMENT_METHOD_DEFAULT = 2; //CASH
     protected $model;
     protected $cartRepo;
     private $paystackRepo;
-    public function __construct(CartRepositoryInterface $cartRepo, PaystackRepository $paystackRepository)
+
+    public function __construct(CartRepositoryInterface $cartRepo, PaystackRepository $paystackRepository, Order $model)
     {
         $this->cartRepo = $cartRepo;
         $this->paystackRepo = $paystackRepository;
-        $this->model = $this->setModel();
+        $this->model = $model;
     }
 
-    /**
-     * Get's all posts.
-     *
-     * @return mixed
-     */
-    public function all()
-    {
-    }
+
 
     public function storeOrder($data)
     {
@@ -66,7 +61,7 @@ class OrderRepository implements OrderRepositoryInterface
         $this->cartRepo->clearCart();
         if ($data['payment_method'] != self::ORDER_PAYMENT_METHOD_DEFAULT) {
             //redirect to paystack
-           
+
             request()->merge([
                 'amount' => $order->grand_total * 100,
                 'reference' => $order->order_number,
@@ -85,5 +80,10 @@ class OrderRepository implements OrderRepositoryInterface
     public function setModel()
     {
         return Order::class;
+    }
+
+    public function findByOrderNumber($order_number)
+    {
+       return $this->model->where('order_number', $order_number)->first();
     }
 }

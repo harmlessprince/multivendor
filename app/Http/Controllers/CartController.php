@@ -42,6 +42,7 @@ class CartController extends Controller
     {
         $product = $this->productRepo->findById($id);
         $this->cartRepo->add($product);
+        return redirect('/')->with(['success' => 'Item Added to cart']);
         return redirect()->route('cart.index');
     }
 

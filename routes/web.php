@@ -29,12 +29,13 @@ Route::middleware(['auth'])->group(function () {
         Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
     });
     Route::prefix('order')->name('order.')->group(function () {
-       Route::post('/', [OrderController::class, 'store'])->name('store');
+        Route::post('/', [OrderController::class, 'store'])->name('store');
     });
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
     Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
+    Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 });
 
 

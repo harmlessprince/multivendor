@@ -23,7 +23,6 @@ class PaystackRepository implements PaystackRepositoryInterface
         try {
             return Paystack::getAuthorizationUrl()->redirectNow();
         } catch (\Exception $e) {
-            dd($e);
             return Redirect::back()->withMessage(['msg' => 'The paystack token has expired. Please refresh the page and try again.', 'type' => 'error']);
         }
     }
@@ -32,5 +31,6 @@ class PaystackRepository implements PaystackRepositoryInterface
      */
     public function verify($refernce)
     {
+
     }
 }
