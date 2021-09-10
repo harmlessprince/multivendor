@@ -61,7 +61,6 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $this->cartRepo->clearCart();
         if ($data['payment_method'] != self::ORDER_PAYMENT_METHOD_DEFAULT) {
             //redirect to paystack
-
             request()->merge([
                 'amount' => $order->grand_total * 100,
                 'reference' => $order->order_number,
@@ -72,8 +71,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         //send email customer
 
         //take user to thank you
-
-        return "Order Completed, thank you for your order ";
+        return redirect('/')->with(['success' => 'Order Completed, thank you for your order']);
     }
 
 
@@ -84,6 +82,6 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
     public function findByOrderNumber($order_number)
     {
-       return $this->model->where('order_number', $order_number)->first();
+        return $this->model->where('order_number', $order_number)->first();
     }
 }

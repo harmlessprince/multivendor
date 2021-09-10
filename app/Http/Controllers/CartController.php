@@ -54,6 +54,10 @@ class CartController extends Controller
     public function checkout()
     {
         $paymentMethods = $this->paymentMethodRepo->all();
+        $cartItems = $this->cartRepo->getContent();
+        if ($cartItems->count() < 1) {
+            return redirect('/')->with(['warning' => 'Cart is empty, please add some items to cart']);
+        }
         return view('cart.checkout', compact('paymentMethods'));
     }
 

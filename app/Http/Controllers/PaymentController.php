@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderPaidEvent;
 use App\Repositories\OrderRepository;
 use App\Repositories\PaystackRepository;
 use Illuminate\Support\Facades\Redirect;
@@ -44,6 +45,7 @@ class PaymentController
                 'payment_method_id' => 1,
             ]);
             //send mail
+            event(new OrderPaidEvent($order));
             return redirect('/')->with(['success' => 'Payment successful']);
         }
         return redirect('/')->with(['error' => 'Payment unsuccessful, Something went wrong ']);
