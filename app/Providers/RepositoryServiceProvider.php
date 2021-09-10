@@ -35,13 +35,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
-        $this->app->singleton(PaystackRepositoryInterface::class, function ($app) {
-            return new PaystackRepository(
-                Config::get('paystack.SECRET_KEY'),
-                Config::get('paystack.PAYMENT_URL'),
-                Config::get('paystack.CALLBACK_URL')
-            );
-        });
+        $this->app->singleton(PaystackRepositoryInterface::class, PaystackRepository::class);
     }
 
     /**

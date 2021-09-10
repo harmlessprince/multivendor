@@ -7,6 +7,7 @@ use App\Repositories\Contracts\CartRepositoryInterface;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use Darryldecode\Cart\Facades\CartFacade;
 use Illuminate\Database\Eloquent\Model;
+use Unicodeveloper\Paystack\Facades\Paystack;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -14,9 +15,11 @@ class OrderRepository implements OrderRepositoryInterface
     const ORDER_PAYMENT_METHOD_DEFAULT = 2; //CASH
     protected $model;
     protected $cartRepo;
-    public function __construct(CartRepositoryInterface $cartRepo)
+    private $paystackRepo;
+    public function __construct(CartRepositoryInterface $cartRepo, PaystackRepository $paystackRepository)
     {
         $this->cartRepo = $cartRepo;
+        $this->paystackRepo = $paystackRepository;
         $this->model = $this->setModel();
     }
 
@@ -61,10 +64,15 @@ class OrderRepository implements OrderRepositoryInterface
         });
         //empty cart
         $this->cartRepo->clearCart();
-
         if ($data['payment_method'] != self::ORDER_PAYMENT_METHOD_DEFAULT) {
-           //redirect to paystack
+            //redirect to paystack
            
+            request()->merge([
+                'amount' => $order->grand_total * 100,
+                'reference' => $order->order_number,
+                'email' => auth()->user()->email,
+            ]);
+            return  $this->paystackRepo->prepareTransaction();
         }
         //send email customer
 

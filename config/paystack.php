@@ -1,33 +1,38 @@
 <?php
 
+/*
+ * This file is part of the Laravel Paystack package.
+ *
+ * (c) Prosper Otemuyiwa <prosperotemuyiwa@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 return [
+
     /**
      * Public Key From Paystack Dashboard
      *
      */
-    'PUBLIC_KEY' => getenv('PAYSTACK_PUBLIC_KEY'),
+    'publicKey' => getenv('PAYSTACK_PUBLIC_KEY'),
 
     /**
      * Secret Key From Paystack Dashboard
      *
      */
-    'SECRET_KEY' => getenv('PAYSTACK_SECRET_KEY'),
+    'secretKey' => getenv('PAYSTACK_SECRET_KEY'),
 
     /**
      * Paystack Payment URL
      *
      */
-    'PAYMENT_URL' => getenv('PAYSTACK_PAYMENT_URL'),
+    'paymentUrl' => getenv('PAYSTACK_PAYMENT_URL'),
 
     /**
      * Optional email address of the merchant
      *
      */
-    'MERCHANT_URL' => getenv('MERCHANT_EMAIL'),
+    'merchantEmail' => getenv('MERCHANT_EMAIL'),
 
-     /**
-     * callback url
-     *
-     */
-    'CALLBACK_URL' => getenv('PAYSTACK_CALLBACK_URL'),
 ];

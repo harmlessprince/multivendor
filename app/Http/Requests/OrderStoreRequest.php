@@ -30,6 +30,7 @@ class OrderStoreRequest extends FormRequest
             'shipping_state' => ['required'],
             'shipping_zipcode' => ['required'],
             'shipping_phone' => ['required'],
+            'payment_method' => ['required'],
         ];
     }
 }
