@@ -21,13 +21,7 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider">
-
-         <!-- Nav Item - Charts -->
-         <li class="nav-item">
-            <a class="nav-link" href="{{route('orders.index')}}">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Orders</span></a>
-        </li>
+        @include('partials.aside.order')
 
         {{-- <!-- Heading -->
         <div class="sidebar-heading">
