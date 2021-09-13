@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\OrderStoreRequest;
 use App\Models\Order;
-use App\Repositories\Contracts\OrderRepositoryInterface;
+use App\Models\OrderStatus;
 use Illuminate\Http\Request;
+use App\Http\Requests\OrderStoreRequest;
+use App\Repositories\Contracts\OrderRepositoryInterface;
+use App\Repositories\Contracts\OrderStatusRepositoryInterface;
 
 class OrderController extends Controller
 {
     protected $orderRepo;
-    public function __construct(OrderRepositoryInterface $orderRepo)
+    protected $orderStatusRepo;
+    public function __construct(OrderRepositoryInterface $orderRepo, OrderStatusRepositoryInterface $orderStatusRepository)
     {
         $this->orderRepo = $orderRepo;
+        $this->orderStatusRepo = $orderStatusRepository;
     }
 
     /**
@@ -57,7 +61,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('order.show', compact('order'));
+        $order_statuses = $this->orderStatusRepo->all();
+        return view('order.show', compact('order', 'order_statuses'));
     }
 
     /**
@@ -68,7 +73,8 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $order_statuses = $this->orderStatusRepo->all();
+        return view('order.edit', compact('order', 'order_statuses'));
     }
 
     /**
@@ -80,7 +86,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        $data = $request->only(['is_paid', 'order_status_id']);
+        $this->orderRepo->update($order->id, $data);
+
+        return redirect()->route('orders.show', $order)->with(['success'=>'Order updated successfully']);
     }
 
     /**

@@ -52,9 +52,19 @@
                     <ul class="list-group list-group-flush  ">
                         <li class="list-group-item border-0">
                             <p><strong>Shipping Status: </strong>
-                                <span class="badge badge-info text-uppercase">
-                                    {{ $order->orderStatus->order_status }}
-                                </span>
+                                @if ($order->orderStatus->order_status == 'pending')
+                                    <span
+                                        class="badge pending">{{ strtoupper($order->orderStatus->order_status) }}</span>
+                                @elseif($order->orderStatus->order_status=="processing")
+                                    <span
+                                        class="badge processing">{{ strtoupper($order->orderStatus->order_status) }}</span>
+                                @elseif($order->orderStatus->order_status=="completed")
+                                    <span
+                                        class="badge badge-success">{{ strtoupper($order->orderStatus->order_status) }}</span>
+                                @else
+                                    <span
+                                        class="badge badge-danger">{{ strtoupper($order->orderStatus->order_status) }}</span>
+                                @endif
                             </p>
                         </li>
                         <li class="list-group-item border-0">

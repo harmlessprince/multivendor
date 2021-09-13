@@ -29,22 +29,39 @@
                         <tr>
                             <td>{{ $order->user->name }}</td>
                             <td>{{ $order->order_number }}</td>
-                            <td>{{ strtoupper($order->orderStatus->order_status) }}</td>
+                            <td>
+                                @if ($order->orderStatus->order_status == 'pending')
+                                    <span
+                                        class="badge pending">{{ strtoupper($order->orderStatus->order_status) }}</span>
+                                @elseif($order->orderStatus->order_status=="processing")
+                                    <span
+                                        class="badge processing">{{ strtoupper($order->orderStatus->order_status) }}</span>
+                                @elseif($order->orderStatus->order_status=="completed")
+                                    <span
+                                        class="badge badge-success">{{ strtoupper($order->orderStatus->order_status) }}</span>
+                                @else
+                                    <span
+                                        class="badge badge-danger">{{ strtoupper($order->orderStatus->order_status) }}</span>
+                                @endif
+                            </td>
                             <td>#{{ number_format($order->grand_total, 2) }}</td>
                             <td>{{ $order->item_count }}</td>
-                            <td>{{ ucwords($order->paymentMethod->payment_method) }}</td>
+
+                            <td>
+                                {{ ucwords($order->paymentMethod->payment_method) }}
+                            </td>
                             <td>
                                 @if ($order->is_paid)
-                                    <span class="badge badge-success">Paid</span>
+                                    <span class="badge badge-success text-capitalize">Paid</span>
                                 @else
-                                    <span class="badge badge-warning">Not Paid</span>
+                                    <span class="badge badge-warning text-capitalize">Not Paid</span>
                                 @endif
                             </td>
                             <td>{{ $order->shipping_fullname }}</td>
                             <td>{{ $order->shipping_phone }}</td>
                             <td>
                                 <div class="dropdown dropleft">
-                                    <a class="btn btn-primary dropdown-toggle" href="#" role="button"
+                                    <a class="btn btn-primary dropdown-toggle dropdownbutton" href="#" role="button"
                                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         Actions link

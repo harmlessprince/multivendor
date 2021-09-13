@@ -19,6 +19,20 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <style>
+        .processing{
+            background-color: #e7ad38;
+            color: #fff;
+        }
+        .pending{
+            background-color: #79645e;
+            color: #fff;
+        }
+        .dropdownbutton{
+            background-color: #077E8C;
+            color: #fff;
+        }
+    </style>
     @stack('styles')
 </head>
 
