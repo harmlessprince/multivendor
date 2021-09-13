@@ -127,9 +127,9 @@
                     <table>
                         <tr>
                             <td class="title">
-                                <img src="{{assets("images/logo.png")}}" alt="Company logo" style="width: 100%; max-width: 300px" />
+                                <img src="{{ asset('images/logo.png') }}" alt="Company logo"
+                                    style="width: 100%; max-width: 300px" />
                             </td>
-
                             <td>
                                 Invoice #: {{ $order->order_number }}<br />
                                 Created: {{ $order->created_at->format('Y-m-d') }}<br />
@@ -162,13 +162,13 @@
 
             <tr class="heading">
                 <td>Payment Method</td>
-
+                <td></td>
                 <td>Check #</td>
             </tr>
 
             <tr class="details">
-                <td>{{ $order->paymentMethod->name }}</td>
-
+                <td>{{ $order->paymentMethod->payment_method }}</td>
+                <td></td>
                 <td>{{ $order->grand_total }}</td>
             </tr>
 
@@ -181,13 +181,13 @@
             @foreach ($order->items as $item)
                 <tr class="item @if ($loop->last) last @endif">
                     <td>{{ $item->name }}</td>
-                    <td># {{ $item->pivot->quantity }}</td>
-                    <td># {{ $item->pivot->price }}</td>
+                    <td>{{ $item->pivot->quantity }}</td>
+                    <td># {{ number_format($item->pivot->price, 2) }}</td>
                 </tr>
             @endforeach
             <tr class="total">
                 <td></td>
-                <td>Total: # {{ $order->grand_total }}</td>
+                <td>Total: # {{ number_format($order->grand_total, 2) }}</td>
             </tr>
         </table>
     </div>
