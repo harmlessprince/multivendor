@@ -22,7 +22,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('order.index');
+        $orders = $this->orderRepo->all();
+        return view('order.index', compact('orders'));
     }
 
     /**

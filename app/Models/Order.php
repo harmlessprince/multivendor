@@ -10,6 +10,14 @@ class Order extends Model
     use HasFactory;
 
     protected $guarded = [];
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+    ];
 
     public function items()
     {
@@ -25,4 +33,10 @@ class Order extends Model
     {
         return $this->belongsTo(PaymentMethod::class);
     }
+
+    public function orderStatus()
+    {
+        return $this->belongsTo(OrderStatus::class);
+    }
+    
 }
