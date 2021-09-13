@@ -14,7 +14,7 @@ class CartRepository implements CartRepositoryInterface
     public function add($product)
     {
         return $this->setModel()->add(array(
-            'id' => uniqid($product->id),
+            'id' => $product->id,
             'name' => $product->name,
             'price' => $product->price,
             'quantity' => 1,

@@ -5,7 +5,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Orders</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -14,7 +14,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Order Number</th>
-                        <th>Status</th>
+                        <th>Delivery Status</th>
                         <th>Grand Total</th>
                         <th>Item Count</th>
                         <th>Payment Method</th>
@@ -29,11 +29,17 @@
                         <tr>
                             <td>{{ $order->user->name }}</td>
                             <td>{{ $order->order_number }}</td>
-                            <td>{{ $order->orderStatus->order_status }}</td>
-                            <td>{{ $order->grand_total }}</td>
+                            <td>{{ strtoupper($order->orderStatus->order_status) }}</td>
+                            <td>#{{ number_format($order->grand_total, 2) }}</td>
                             <td>{{ $order->item_count }}</td>
-                            <td>{{ $order->paymentMethod->payment_method }}</td>
-                            <td>{{ $order->is_paid }}</td>
+                            <td>{{ ucwords($order->paymentMethod->payment_method) }}</td>
+                            <td>
+                                @if ($order->is_paid)
+                                    <span class="badge badge-success">Paid</span>
+                                @else
+                                    <span class="badge badge-warning">Not Paid</span>
+                                @endif
+                            </td>
                             <td>{{ $order->shipping_fullname }}</td>
                             <td>{{ $order->shipping_phone }}</td>
                             <td>
@@ -53,8 +59,12 @@
                                                 href="{{ route('orders.edit', $order) }}" role="button">Edit</a>
                                         </div>
                                         <div class="dropdown-item">
-                                            <a class="btn btn-danger btn-md w-100"
-                                                href="{{ route('orders.destroy', $order) }}" role="button">Delete</a>
+                                            <form action="{{ route('orders.destroy', $order) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button class="btn btn-danger btn-md w-100">Delete</button>
+                                            </form>
+
                                         </div>
                                     </div>
                                 </div>

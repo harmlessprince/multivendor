@@ -57,7 +57,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('order.show', compact('order'));
     }
 
     /**
@@ -91,6 +91,7 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $this->orderRepo->deleteById($order->id);
+        return back()->with(['success' => 'Order Deleted Successfully']);
     }
 }
