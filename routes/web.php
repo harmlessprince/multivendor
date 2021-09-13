@@ -31,6 +31,11 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('order')->name('order.')->group(function () {
         Route::post('/', [OrderController::class, 'store'])->name('store');
     });
+    /**
+     * Order Resource
+     */
+    Route::resource('orders', OrderController::class)->except(['store']);
+
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -41,5 +46,3 @@ Route::middleware(['auth'])->group(function () {
 
 
 require __DIR__ . '/auth.php';
-
-
