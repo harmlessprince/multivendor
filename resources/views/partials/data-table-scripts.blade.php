@@ -9,7 +9,8 @@
              background-color: #fff;
          }
          .action .dropdown-item.active,
-         .dropdown-item:hover a {
+         .dropdown-item:hover a, .action .dropdown-item.active,
+         .dropdown-item:hover button {
             transform: scale(1.15)
          }
  
