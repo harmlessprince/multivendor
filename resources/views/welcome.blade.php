@@ -8,7 +8,7 @@
                     <div class="card-group">
                         <div class="card">
                             <img class="card-img-top" data-src="{{ $product->cover_img }}" alt="Product Image"
-                                src="{{ $product->cover_img }}">
+                                src="{{ asset($product->cover_img) }}">
                             <div class="card-body">
                                 <h4 class="card-title">{{ $product->name }}</h4>
                                 <p class="card-text">{{ $product->description }}</p>

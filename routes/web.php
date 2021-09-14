@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ShopController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,10 @@ Route::middleware(['auth'])->group(function () {
     });
     /**
      * Order Resource
+     */
+    Route::resource('shops', ShopController::class);
+     /**
+     * Shop Resource
      */
     Route::resource('orders', OrderController::class)->except(['store']);
 
