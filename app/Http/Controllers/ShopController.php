@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ShopRepository;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    protected $shopRepo;
+    public function __construct(ShopRepository $shopRepository)
+    {
+        $this->shopRepo = $shopRepository;
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +41,7 @@ class ShopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

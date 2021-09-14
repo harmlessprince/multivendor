@@ -41,7 +41,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
         $this->app->singleton(PaystackRepositoryInterface::class, PaystackRepository::class);
         $this->app->bind(OrderStatusRepositoryInterface::class, OrderStatusRepository::class);
-        $this->app->bind(ShopRepositoryInterface::class, ShopRepository::class);
+        // $this->app->bind(ShopRepositoryInterface::class, ShopRepository::class);
     }
 
     /**

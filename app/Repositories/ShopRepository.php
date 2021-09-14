@@ -4,8 +4,7 @@ namespace App\Repositories;;
 use App\Models\Shop;
 use App\Repositories\Contracts\ShopRepositoryInterface;
 use App\Repositories\Eloquent\BaseRepository;
-class ShopRepository extends BaseRepository implements ShopRepositoryInterface
-{
+class ShopRepository extends BaseRepository {
 
     /**
      * @var Model
