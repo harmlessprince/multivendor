@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ShopCreatedEvent;
 use App\Http\Requests\ShopRequest;
 use App\Repositories\ShopRepository;
 use Illuminate\Http\Request;
@@ -48,7 +49,7 @@ class ShopController extends Controller
             return redirect()->route('home')->with('error', 'A Shop has already been registered to you');
         }
         $shop = $this->shopRepo->create($validatedData);
-        
+        event( new ShopCreatedEvent($shop));
         return redirect()->route('home')->with('success', 'Shop created successfully');
     }
 

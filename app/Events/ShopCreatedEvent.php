@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Shop;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,9 +20,10 @@ class ShopCreatedEvent
      *
      * @return void
      */
-    public function __construct()
+    public $shop;
+    public function __construct(Shop $shop)
     {
-        //
+        $this->shop = $shop;
     }
 
     /**

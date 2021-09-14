@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\OrderPaidEvent;
 use App\Events\OrderPlacedEvent;
+use App\Events\ShopCreatedEvent;
 use App\Listeners\OrderPlacedListener;
 use App\Listeners\SendMailOrderPaidNotification;
+use App\Listeners\ShopActviationRequestListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -28,7 +30,10 @@ class EventServiceProvider extends ServiceProvider
         // ],
         OrderPaidEvent::class => [
             SendMailOrderPaidNotification::class,
-        ]
+        ],
+        ShopCreatedEvent::class =>[
+            ShopActviationRequestListener::class,
+        ],
     ];
 
     /**

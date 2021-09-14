@@ -2,8 +2,11 @@
 
 namespace App\Listeners;
 
+use App\Events\ShopCreatedEvent;
+use App\Mail\ShopActivationRequest;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
 class ShopActviationRequestListener
 {
@@ -23,8 +26,8 @@ class ShopActviationRequestListener
      * @param  object  $event
      * @return void
      */
-    public function handle($event)
+    public function handle(ShopCreatedEvent $event)
     {
-        //
+        Mail::to($admins)->send(new ShopActivationRequest($event->shop));
     }
 }
