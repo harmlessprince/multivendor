@@ -15,8 +15,10 @@ use App\Repositories\Contracts\OrderRepositoryInterface;
 use App\Repositories\Contracts\OrderStatusRepositoryInterface;
 use App\Repositories\Contracts\PaymentMethodRepositoryInterface;
 use App\Repositories\Contracts\PaystackRepositoryInterface;
+use App\Repositories\Contracts\ShopRepositoryInterface;
 use App\Repositories\Eloquent\BaseRepository;
 use App\Repositories\OrderStatusRepository;
+use App\Repositories\ShopRepository;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -39,6 +41,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
         $this->app->singleton(PaystackRepositoryInterface::class, PaystackRepository::class);
         $this->app->bind(OrderStatusRepositoryInterface::class, OrderStatusRepository::class);
+        $this->app->bind(ShopRepositoryInterface::class, ShopRepository::class);
     }
 
     /**
@@ -50,5 +53,4 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         //
     }
-
 }
