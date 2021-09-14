@@ -1,10 +1,10 @@
 <?php
 
-namespace {{ namespace }};;
-use App\Models\{{Model}};
+namespace App\Repositories;;
+use App\Models\Shop;
+use App\Repositories\Contracts\ShopRepositoryInterface;
 use App\Repositories\Eloquent\BaseRepository;
-use App\Repositories\Contracts\{{class}}Interface;
-class {{class}} extends BaseRepository implements {{class}}Interface
+class ShopRepository extends BaseRepository implements ShopRepositoryInterface
 {
 
     /**
@@ -15,7 +15,7 @@ class {{class}} extends BaseRepository implements {{class}}Interface
      * BaseRepository Constructor
      * @param Model $model
      */
-    public function __construct({{Model}} $model)
+    public function __construct(Shop $model)
     {
         $this->model = $model;
     }

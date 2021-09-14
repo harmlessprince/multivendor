@@ -101,7 +101,7 @@ class MakeInterfaceCommand extends GeneratorCommand
         $className = Str::studly(class_basename($this->argument('name')));
 
         $this->call('make:repository', [
-            'name' => "{$className}Repository",
+            'name' => "{$className}",
         ]);
     }
     /**

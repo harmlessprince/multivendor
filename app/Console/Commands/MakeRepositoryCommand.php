@@ -39,10 +39,23 @@ class MakeRepositoryCommand extends GeneratorCommand
      */
     protected function replaceClass($stub, $name)
     {
-        $className = $name;
+        $className = $name."Repository";
         $stub = parent::replaceClass($stub, $className);
+        $stub = $this->replaceModel($stub);
         return $stub;
         // return str_replace(['dummy:command', '{{ class }}'], $this->option('name'), $stub);
+    }
+
+    /**
+     * Replace the class name for the given stub.
+     *
+     * @param  string  $stub
+     * @param  string  $name
+     * @return string
+     */
+    protected function replaceModel($stub)
+    {
+        return str_replace(['{{Model}}'], $this->argument('name'), $stub);
     }
 
     /**
@@ -78,7 +91,7 @@ class MakeRepositoryCommand extends GeneratorCommand
         $name = Str::replaceFirst($this->rootNamespace(), '', $name);
         $name = $name;
 
-        return $this->laravel['path'] . '/' . str_replace('\\', '/', $name) . '.php';
+        return $this->laravel['path'] . '/' . str_replace('\\', '/', $name) . 'Repository.php';
     }
     /**
      * Get the console command arguments.
