@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ShopRequest;
 use App\Repositories\ShopRepository;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,6 @@ class ShopController extends Controller
     public function __construct(ShopRepository $shopRepository)
     {
         $this->shopRepo = $shopRepository;
-        
     }
     /**
      * Display a listing of the resource.
@@ -39,9 +39,17 @@ class ShopController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ShopRequest $request)
     {
+        $validatedData = $request->validated();
         
+        $validatedData = array_merge($validatedData, ['user_id' => auth()->id() ?? 1]);
+        if ($this->shopRepo->userHasShop()){
+            return redirect()->route('home')->with('error', 'A Shop has already been registered to you');
+        }
+        $shop = $this->shopRepo->create($validatedData);
+        
+        return redirect()->route('home')->with('success', 'Shop created successfully');
     }
 
     /**

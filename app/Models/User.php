@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function shop()
     {
-        $this->hasOne(Shop::class);
+        return $this->hasOne(Shop::class);
     }
 }
