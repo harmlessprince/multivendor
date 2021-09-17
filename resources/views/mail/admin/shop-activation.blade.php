@@ -1,12 +1,17 @@
 @component('mail::message')
-# Introduction
+    # Shop Activation Request
 
-The body of your message.
+    Please activate shop. Here are the details.
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
 
-Thanks,<br>
-{{ config('app.name') }}
+    Shop Name: {{ $shop->name }}
+
+    Shop Owner: {{ $shop->owner->name }}
+    
+    @component('mail::button', ['url' => route('shops.index')])
+        Manage Shops
+    @endcomponent
+
+    Thanks,<br>
+    {{ config('app.name') }}
 @endcomponent

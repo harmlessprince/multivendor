@@ -45,9 +45,7 @@ class ShopController extends Controller
         $validatedData = $request->validated();
         
         $validatedData = array_merge($validatedData, ['user_id' => auth()->id() ?? 1]);
-        if ($this->shopRepo->userHasShop()){
-            return redirect()->route('home')->with('error', 'A Shop has already been registered to you');
-        }
+        
         $shop = $this->shopRepo->create($validatedData);
         event( new ShopCreatedEvent($shop));
         return redirect()->route('home')->with('success', 'Shop created successfully');

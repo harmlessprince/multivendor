@@ -20,18 +20,21 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <style>
-        .processing{
+        .processing {
             background-color: #e7ad38;
             color: #fff;
         }
-        .pending{
+
+        .pending {
             background-color: #79645e;
             color: #fff;
         }
-        .dropdownbutton{
+
+        .dropdownbutton {
             background-color: #077E8C;
             color: #fff;
         }
+
     </style>
     @stack('styles')
 </head>
@@ -52,7 +55,7 @@
                 @include('partials.nav')
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                  
+
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">@yield('header', 'Dashboard')</h1>
@@ -108,8 +111,12 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary mr-auto" type="button" data-dismiss="modal">Cancel</button>
+                    <form  method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{route('logout')}}" onclick="event.preventDefault();
+                            this.closest('form').submit();" class="btn btn-primary">logout</a>
+                    </form>
                 </div>
             </div>
         </div>

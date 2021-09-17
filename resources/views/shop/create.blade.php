@@ -7,7 +7,7 @@
             @csrf
             <div class="form-group">
                 <label for="name">Name of Shop</label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="name">
+                <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="name" value="{{old('name')}}">
                 @error('name')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -15,7 +15,7 @@
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea name="description" id="description" rows="5" class="form-control"></textarea>
+                <textarea name="description" id="description" rows="5" class="form-control">{{old('description')}}</textarea>
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror

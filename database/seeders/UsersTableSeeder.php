@@ -17,13 +17,31 @@ class UsersTableSeeder extends Seeder
     {
         if (User::count() == 0) {
             // $role = Role::where('name', 'admin')->firstOrFail();
-            User::create([
-                'name'           => 'Admin',
+            $user =  User::firstOrCreate([
+                'name'           => 'Super Admin',
                 'email'          => 'admin@admin.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => Str::random(60),
                 // 'role_id'        => $role->id,
             ]);
+
+            $user1 =  User::firstOrCreate([
+                'name'           => 'Customer 1',
+                'email'          => 'customer@cust.com',
+                'password'       => bcrypt('password'),
+                'remember_token' => Str::random(60),
+                // 'role_id'        => $role->id,
+            ]);
+            $user2 = User::firstOrCreate([
+                'name'           => 'Customer 2',
+                'email'          => 'customer2@cust.com',
+                'password'       => bcrypt('password'),
+                'remember_token' => Str::random(60),
+                // 'role_id'        => $role->id,
+            ]);
+            $user->syncRoles(['super-admin']);
+            $user1->syncRoles(['shop-owner']);
+            $user2->syncRoles(['shop-owner']);
         }
     }
 }
